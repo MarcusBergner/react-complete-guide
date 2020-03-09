@@ -14,12 +14,20 @@ const app = props => {
   const [otherState, setOtherState] = useState( "some other value");
 
   console.log(personsState,otherState);
-  const switchNameHandler =()=>{
+    // state = {
+  //   persons:[
+  //     {name: "Max", age:28},
+  //     {name: "Manu", age :22},
+  //     {name: "Stefan", age :42}
+  //   ],
+  //   otherState:"some other value"
+  // };
+  const switchNameHandler =(newName)=>{
     // console.log("Was clicked!");
     // DON'T DO THIS: personsState.persons[0].name= "Maximilaim";
     // setState({}) it will merge this with existing data  
     setPersonsState({persons:[
-      {name: "Maximilian", age:28},
+      {name: newName, age:28},
       {name: "Manu", age :22},
       {name: "Stefan", age :26}
     ]
@@ -29,11 +37,18 @@ const app = props => {
       <div className="App">
        <h1>Hi i'am an react app</h1>
        <p>This is really working!</p>
-       <button onClick={switchNameHandler}>Switch Name</button>
+       <button onClick={()=> this.switchNameHandler("Maximilian")}>Switch Name</button>
        {/* <Person name="Max" age="22"/> */}
-       <Person name={personsState.persons[0].name} age={personsState.persons[0].age}/>
-       <Person name={personsState.persons[1].name} age={personsState.persons[1].age} />
-       <Person name={personsState.persons[2].name} age={personsState.persons[2].age}>My Hobbies: Racing</Person>
+       <Person
+        name={personsState.persons[0].name}
+         age={personsState.persons[0].age}/>
+       <Person 
+       name={personsState.persons[1].name}
+        age={personsState.persons[1].age} />
+       <Person 
+       name={personsState.persons[2].name}
+        age={personsState.persons[2].age}
+        click={this.switchNameHandler.bind(this, "MaX")}>My Hobbies: Racing</Person>
       </div>
     );
   
