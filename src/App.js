@@ -9,10 +9,20 @@ class App extends Component {
       {name: "Max", age:28},
       {name: "Manu", age :22},
       {name: "Stefan", age :42}
-    ]
+    ],
+    otherState:"some other value"
   }
   switchNameHandler =()=>{
-    console.log("Was clicked!");
+    // console.log("Was clicked!");
+    // DON'T DO THIS: this.state.persons[0].name= "Maximilaim";
+    // setState({}) it will merge this with existing data  
+    this.setState({persons:[
+      {name: "Maximilian", age:28},
+      {name: "Manu", age :22},
+      {name: "Stefan", age :26}
+    ]
+
+    })
   }
   render() {
     return (
