@@ -13,8 +13,11 @@ class  App extends Component {
     otherState:"some other value",
     showPersons:false
   }
+  // remove persons by index and update state
   deletePersonHandler= (personIndex)=>{
-    const persons = this.state.persons;
+    // const persons = this.state.persons.slice();
+    // equivalent to slice(), but es6 syntax to become a new array with objects from the old array!
+    const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({persons:persons});
   }
