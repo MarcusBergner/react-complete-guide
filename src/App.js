@@ -21,17 +21,21 @@ class  App extends Component {
     persons.splice(personIndex, 1);
     this.setState({persons:persons});
   }
-  nameChangedHandler = (event) => {
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+
+    });
+    // --> alternative to [...] const person = Object.assign({}, this.state.persons[personIndex]);
+    const person = {...this.state.persons[personIndex]};
     // (event.target.value) event binding handler --> value property which users entered.  
     // setState()--> will be merged whatever pass with our existing state. 
     // --> after react know that the state was changed & that should check if it need to update the DOM! 
-    this.setState({
-      persons:[
-        {name: "max", age:28},
-        {name: event.target.value, age :29},
-        {name: "Stefan", age :26}
-      ]
-    })
+    
+    person.name = event.target.value;
+    const persons = [...this.state.persons];
+    persons[personIndex]= person;
+    this.setState({ persons: persons })
   }
   togglePersonsHandler = () => {
     const doesShow= this.state.showPersons;
@@ -58,7 +62,8 @@ class  App extends Component {
             click={()=> this.deletePersonHandler(index)}
              name={person.name}
             age={person.age}
-            key={person.id}/>
+            key={person.id}
+            changed={(event)=> this.nameChangedHandler(event, person.id)}/>
           })}
           
         </div> 
