@@ -3,17 +3,6 @@ import './App.css';
 import Person from "./Person/Person";
 // this show the traditional set up for manage state  by class-components, befor React 16.8 lunched!
 class  App extends Component {
-//  const [personsState, setPersonsState] =  useState({
-//     persons:[
-//       {name: "Max", age:28},
-//       {name: "Manu", age :22},
-//       {name: "Stefan", age :42}
-//     ],
-//     otherState:"some other value"
-//   });
-//   const [otherState, setOtherState] = useState( "some other value");
-
-//   console.log(personsState,otherState);
     state = {
     persons:[
       {name: "Max", age:28},
@@ -21,23 +10,24 @@ class  App extends Component {
       {name: "Stefan", age :42}
     ],
     otherState:"some other value"
-  };
+  }
    switchNameHandler =(newName)=>{
     // console.log("Was clicked!");
-    // DON'T DO THIS: personsState.persons[0].name= "Maximilaim";
+    // DON'T DO THIS: this.state.persons[0].name= "Maximilaim";
     // setState({}) it will merge this with existing data  
-    setPersonsState({persons:[
+    this.setState({persons:[
       {name: newName, age:28},
       {name: "Manu", age :22},
       {name: "Stefan", age :26}
     ]
     })
   }
-  nameChangedHandler = (event) =>{
+  nameChangedHandler = (event) => {
     this.setState({
       person:[
-        {name: newName, age:28},
-        {name: "Manu", age :22},
+        {name: "max", age:28},
+        // (event.target.value) event binding handler --> value property which users entered.  
+        {name: event.target.value, age :22},
         {name: "Stefan", age :26}
       ]
     })
@@ -47,18 +37,22 @@ class  App extends Component {
       <div className="App">
        <h1>Hi i'am an react app</h1>
        <p>This is really working!</p>
+       {/* anonymous function will executed onClick 
+       returns result of switchNameHandler() */}
        <button onClick={()=> this.switchNameHandler("Maximilian")}>Switch Name</button>
        {/* <Person name="Max" age="22"/> */}
        <Person
-        name={personsState.persons[0].name}
-         age={personsState.persons[0].age}/>
+        name={this.state.persons[0].name}
+         age={this.state.persons[0].age}/>
        <Person 
-       name={personsState.persons[1].name}
-        age={personsState.persons[1].age} />
+       name={this.state.persons[1].name}
+        age={this.state.persons[1].age}
+        />
        <Person 
-       name={personsState.persons[2].name}
-        age={personsState.persons[2].age}
-        click={this.switchNameHandler.bind(this, "MaX")}>My Hobbies: Racing</Person>
+       name={this.state.persons[2].name}
+        age={this.state.persons[2].age}
+        click={this.switchNameHandler.bind(this, "MaX !")}
+        changed={this.nameChangedHandler}>My Hobbies: Racing</Person>
       </div>
     );
   
@@ -75,4 +69,4 @@ class  App extends Component {
       // };
       
     }
-    export default app;
+    export default App;
