@@ -13,16 +13,10 @@ class  App extends Component {
     otherState:"some other value",
     showPersons:false
   }
-   switchNameHandler = (newName) => {
-    // console.log("Was clicked!");
-    // DON'T DO THIS: this.state.persons[0].name= "Maximilaim";
-    // setState({}) it will merge this with existing data  
-    this.setState({persons:[
-      {name: newName, age:28},
-      {name: "Manu", age :22},
-      {name: "Stefan", age :26}
-    ]
-    })
+  deletePersonHandler= (personIndex)=>{
+    const persons = this.state.persons;
+    persons.splice(personIndex, 1);
+    this.setState({persons:persons});
   }
   nameChangedHandler = (event) => {
     // (event.target.value) event binding handler --> value property which users entered.  
@@ -55,20 +49,14 @@ class  App extends Component {
     if(this.state.showPersons){
       persons = (
         <div >
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age}/>
-          <Person 
-        	  name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind( this, "MaX !" )}
-            changed={this.nameChangedHandler} > My Hobbies: Racing</Person>
-    
-          <Person 
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-          />
-            
+          {/* start outputing as list, if more than 2 arguments inside map(), they must wrap in ()  */}
+          {this.state.persons.map((person, index) => {
+            return <Person
+            click={()=> this.deletePersonHandler(index)}
+             name={person.name}
+            age={person.age}/>
+          })}
+          
         </div> 
       );
     }
