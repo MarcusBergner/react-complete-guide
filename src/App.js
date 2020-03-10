@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from "./Person/Person";
+import Person from './Person/Person';
+
 // this show the traditional set up for manage state  by class-components, befor React 16.8 lunched!
 class  App extends Component {
     state = {
@@ -12,7 +13,7 @@ class  App extends Component {
     otherState:"some other value",
     showPersons:false
   }
-   switchNameHandler =(newName)=>{
+   switchNameHandler = (newName) => {
     // console.log("Was clicked!");
     // DON'T DO THIS: this.state.persons[0].name= "Maximilaim";
     // setState({}) it will merge this with existing data  
@@ -28,7 +29,7 @@ class  App extends Component {
     // setState()--> will be merged whatever pass with our existing state. 
     // --> after react know that the state was changed & that should check if it need to update the DOM! 
     this.setState({
-      person:[
+      persons:[
         {name: "max", age:28},
         {name: event.target.value, age :29},
         {name: "Stefan", age :26}
@@ -37,19 +38,40 @@ class  App extends Component {
   }
   togglePersonsHandler = () => {
     const doesShow= this.state.showPersons;
-    this.setState({showPersons:!doesShow});
+    this.setState({ showPersons: !doesShow });
   }
 
+  // everything inside the render method gets executed whenever React re-renders this component
   render() {
-
     // set inlineStyles
-        const style = {
+    const style = {
       backgroundColor:"white",
       font:"inherit",
       border:"1px solid blue",
       padding: "8px",
       cursor: "pointer"
     };
+    let persons = null;
+    if(this.state.showPersons){
+      persons = (
+        <div >
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}/>
+          <Person 
+        	  name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            click={this.switchNameHandler.bind( this, "MaX !" )}
+            changed={this.nameChangedHandler} > My Hobbies: Racing</Person>
+    
+          <Person 
+          name={this.state.persons[2].name}
+          age={this.state.persons[2].age}
+          />
+            
+        </div> 
+      );
+    }
 
     return (
       <div className="App">
@@ -60,28 +82,12 @@ class  App extends Component {
        <button
        style={style} 
        onClick={this.togglePersonsHandler}>Toggle Persons</button>
-       {/* <Person name="Max" age="22"/> */}
-      { this.state.showPersons === true ? 
-        <div >
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age}/>
-          <Person 
-        	   name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind(this, "MaX !")}
-            changed={this.nameChangedHandler} > My Hobbies: Racing</Person>
-    
-          <Person 
-          name={this.state.persons[2].name}
-            age={this.state.persons[2].age}
-          />
-            
-      </div> : null
-      }
+       {persons}
+        
+      
       </div>
     );
-  
+   // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
 export default App;
