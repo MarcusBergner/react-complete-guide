@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import styled from "styled-components";
 import './App.css';
+import classes from "./App.css";
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import Person from './Person/Person';
 
 
-const StyledButton = styled.button`
-    background-color: ${props => props.alt ? "red" : "green"};
-    color: white;
-    font: inherit;
-    border: 1px solid blue;
-    padding: 8px;
-    cursor: pointer;
-    // define pseudo selector with Radium- package (until Radium-package is install).
-      &:hover {
-        background-color: ${props => props.alt ? "salmon" : "lightgreen"};
-        color: black;
-      }
-  `;
+// const button = styled.button`
+//     background-color: ${props => props.alt ? "red" : "green"};
+//     color: white;
+//     font: inherit;
+//     border: 1px solid blue;
+//     padding: 8px;
+//     cursor: pointer;
+//       &:hover {
+//         background-color: ${props => props.alt ? "salmon" : "lightgreen"};
+//         color: black;
+//       }
+//   `;
 // this show the traditional set up for manage state  by class-components, befor React 16.8 lunched!
 class  App extends Component {
     state = {
@@ -60,60 +60,65 @@ class  App extends Component {
   // everything inside the render method gets executed whenever React re-renders this component
   render() {
     // set inlineStyles
-    const style = {
-      backgroundColor:"green",
-      color:"white",
-      font:"inherit",
-      border:"1px solid blue",
-      padding: "8px",
-      cursor: "pointer",
-      // define pseudo selector with Radium- package (until Radium-package is install).
-      ":hover" :{
-        backgroundColor:"lightgreen",
-        color:"black"
-      }
-    };
+    // const style = {
+    //   backgroundColor:"green",
+    //   color:"white",
+    //   font:"inherit",
+    //   border:"1px solid blue",
+    //   padding: "8px",
+    //   cursor: "pointer",
+    //   // define pseudo selector with Radium- package (until Radium-package is install).
+    //   ":hover" :{
+    //     backgroundColor:"lightgreen",
+    //     color:"black"
+    //   }
+    // };
     let persons = null;
+    let btnClasses = "";
     // setting person variable 
     if(this.state.showPersons){
       persons = (
         <div >
           {/* start outputing as list, if more than 2 arguments inside map(), they must wrap in ()  */}
           {this.state.persons.map((person, index) => {
-            return <Person
+            return <ErrorBoundary  key={person.id}>
+
+            <Person
             click={()=> this.deletePersonHandler(index)}
-             name={person.name}
+            name={person.name}
             age={person.age}
-            key={person.id}
+           
             changed={(event)=> this.nameChangedHandler(event, person.id)}/>
+            </ErrorBoundary> 
           })}
           
         </div> 
       );
-      // styling new value to one of style-properties
-      style.backgroundColor="red";
-          style[":hover"] = {
-            backgroundColor:"salmon",
-            color:"black"
-          }
+      // // change style dynamicaly styling new value to one of style-properties
+      btnClasses = classes.Red;
+      // style.backgroundColor="red";
+      //     style[":hover"] = {
+      //       backgroundColor:"salmon",
+      //       color:"black"
+      //     }
     }
     // setting dynamic style inputs, reffernce to css-classes
-    const classes=[];
+    const assignedClasses=[];
     if(this.state.persons.length <=2){
-    classes.push("red"); 
+    assignedClasses.push(classes.red); // classes = ["red"]
   }
   if(this.state.persons.length <=1){
-    classes.push("bold");
+    assignedClasses.push(classes.bold);  // classes = ["red", "bold"]
   }
     return (
 
-       <div className="App">
+       <div className={classes.App}>
          <h1>Hi i'am an react app</h1>
-         <p className={classes.join("")}>This is really working!</p>
+         <p className={assignedClasses.join(" ")}>This is really working!</p>
        {/* anonymous function will executed onClick 
        returns result of switchNameHandler() */}
-         <StyledButton alt={this.state.showPersons}
-         onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton>
+         <button className={btnClasses}
+         onClick={this.togglePersonsHandler}>Toggle Persons</button>
          {persons}
         
       
