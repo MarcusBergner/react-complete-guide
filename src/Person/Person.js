@@ -20,11 +20,11 @@ const StyleDiv = styled.div`
 const person = (props) => {
 
     
-    const style ={
-        "@media (min-width: 500px)" :{
-            width: "450"
-        }
-    };
+    // const style ={
+    //     "@media (min-width: 500px)" :{
+    //         width: "450"
+    //     }
+    // };
     // return <p>I'm a Person and I am {Math.floor(Math.random() * 30)} years old!</p>
     return (
     // <div className="Person" style={style}>

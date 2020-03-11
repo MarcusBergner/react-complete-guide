@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import classes from "./App.css";
 import Person from './Person/Person';
 
 
@@ -58,20 +59,21 @@ class  App extends Component {
   // everything inside the render method gets executed whenever React re-renders this component
   render() {
     // set inlineStyles
-    const style = {
-      backgroundColor:"green",
-      color:"white",
-      font:"inherit",
-      border:"1px solid blue",
-      padding: "8px",
-      cursor: "pointer",
-      // define pseudo selector with Radium- package (until Radium-package is install).
-      ":hover" :{
-        backgroundColor:"lightgreen",
-        color:"black"
-      }
-    };
+    // const style = {
+    //   backgroundColor:"green",
+    //   color:"white",
+    //   font:"inherit",
+    //   border:"1px solid blue",
+    //   padding: "8px",
+    //   cursor: "pointer",
+    //   // define pseudo selector with Radium- package (until Radium-package is install).
+    //   ":hover" :{
+    //     backgroundColor:"lightgreen",
+    //     color:"black"
+    //   }
+    // };
     let persons = null;
+    let btnClasses = "";
     // setting person variable 
     if(this.state.showPersons){
       persons = (
@@ -88,29 +90,30 @@ class  App extends Component {
           
         </div> 
       );
-      // styling new value to one of style-properties
-      style.backgroundColor="red";
-          style[":hover"] = {
-            backgroundColor:"salmon",
-            color:"black"
-          }
+      // // change style dynamicaly styling new value to one of style-properties
+      btnClasses = classes.Red;
+      // style.backgroundColor="red";
+      //     style[":hover"] = {
+      //       backgroundColor:"salmon",
+      //       color:"black"
+      //     }
     }
     // setting dynamic style inputs, reffernce to css-classes
-    const classes=[];
+    const assignedClasses=[];
     if(this.state.persons.length <=2){
-    classes.push("red"); 
+    assignedClasses.push(classes.red); // classes = ["red"]
   }
   if(this.state.persons.length <=1){
-    classes.push("bold");
+    assignedClasses.push(classes.bold);  // classes = ["red", "bold"]
   }
     return (
 
-       <div className="App">
+       <div className={classes.App}>
          <h1>Hi i'am an react app</h1>
-         <p className={classes.join("")}>This is really working!</p>
+         <p className={assignedClasses.join(" ")}>This is really working!</p>
        {/* anonymous function will executed onClick 
        returns result of switchNameHandler() */}
-         <button className="button"
+         <button className={btnClasses}
          onClick={this.togglePersonsHandler}>Toggle Persons</button>
          {persons}
         
