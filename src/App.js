@@ -1,4 +1,4 @@
-import Radium from "radium";
+import Radium, { StyleRoot } from "radium";
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
@@ -78,7 +78,7 @@ class  App extends Component {
       );
       // styling new value to one of style-properties
       style.backgroundColor="red";
-          style[":hover"]={
+          style[":hover"] = {
             backgroundColor:"salmon",
             color:"black"
           }
@@ -92,6 +92,8 @@ class  App extends Component {
     classes.push("bold");
   }
     return (
+      <StyleRoot>
+
       <div className="App">
        <h1>Hi i'am an react app</h1>
        <p className={classes.join("")}>This is really working!</p>
@@ -104,6 +106,7 @@ class  App extends Component {
         
       
       </div>
+       </StyleRoot>
     );
    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
