@@ -5,7 +5,7 @@ import Person from './Person/Person';
 
 
 const StyledButton = styled.button`
-    background-color:green;
+    background-color: ${props => props.alt ? "red" : "green"};
     color: white;
     font: inherit;
     border: 1px solid blue;
@@ -13,7 +13,7 @@ const StyledButton = styled.button`
     cursor: pointer;
     // define pseudo selector with Radium- package (until Radium-package is install).
       &:hover {
-        background-color: lightgreen;
+        background-color: ${props => props.alt ? "salmon" : "lightgreen"};
         color: black;
       }
   `;
@@ -112,7 +112,7 @@ class  App extends Component {
          <p className={classes.join("")}>This is really working!</p>
        {/* anonymous function will executed onClick 
        returns result of switchNameHandler() */}
-         <StyledButton
+         <StyledButton alt={this.state.showPersons}
          onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton>
          {persons}
         
