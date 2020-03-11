@@ -1,8 +1,22 @@
-import Radium, { StyleRoot } from "radium";
 import React, { Component } from 'react';
+import styled from "styled-components";
 import './App.css';
 import Person from './Person/Person';
 
+
+const StyledButton = styled.button`
+    background-color: ${props => props.alt ? "red" : "green"};
+    color: white;
+    font: inherit;
+    border: 1px solid blue;
+    padding: 8px;
+    cursor: pointer;
+    // define pseudo selector with Radium- package (until Radium-package is install).
+      &:hover {
+        background-color: ${props => props.alt ? "salmon" : "lightgreen"};
+        color: black;
+      }
+  `;
 // this show the traditional set up for manage state  by class-components, befor React 16.8 lunched!
 class  App extends Component {
     state = {
@@ -92,27 +106,25 @@ class  App extends Component {
     classes.push("bold");
   }
     return (
-      <StyleRoot>
 
        <div className="App">
          <h1>Hi i'am an react app</h1>
          <p className={classes.join("")}>This is really working!</p>
        {/* anonymous function will executed onClick 
        returns result of switchNameHandler() */}
-         <button
-        style={style} 
-         onClick={this.togglePersonsHandler}>Toggle Persons</button>
+         <StyledButton alt={this.state.showPersons}
+         onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton>
          {persons}
         
       
         </div>
-      </StyleRoot>
+      
     );
    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
 // wrapping App-component with Radium-component --> adding kind of injection some extra functionality 
-export default Radium (App);
+export default  App;
     // define a spezial propertie(state), this only works in components which are extending component!
       // with React 16.8 a new feature "React hooks" --> manage state also in functional components
       // state = {
