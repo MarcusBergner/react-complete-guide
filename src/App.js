@@ -1,3 +1,4 @@
+import Radium from "radium";
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
@@ -51,7 +52,12 @@ class  App extends Component {
       font:"inherit",
       border:"1px solid blue",
       padding: "8px",
-      cursor: "pointer"
+      cursor: "pointer",
+      // define pseudo selector with Radium- package (until Radium-package is install).
+      ":hover" :{
+        backgroundColor:"lightgreen",
+        color:"black"
+      }
     };
     let persons = null;
     // setting person variable 
@@ -72,9 +78,13 @@ class  App extends Component {
       );
       // styling new value to one of style-properties
       style.backgroundColor="red";
+          style[":hover"]={
+            backgroundColor:"salmon",
+            color:"black"
+          }
     }
     // setting dynamic style inputs, reffernce to css-classes
-    let classes=[];
+    const classes=[];
     if(this.state.persons.length <=2){
     classes.push("red"); 
   }
@@ -98,7 +108,8 @@ class  App extends Component {
    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
-export default App;
+// wrapping App-component with Radium-component --> adding kind of injection some extra functionality 
+export default Radium (App);
     // define a spezial propertie(state), this only works in components which are extending component!
       // with React 16.8 a new feature "React hooks" --> manage state also in functional components
       // state = {

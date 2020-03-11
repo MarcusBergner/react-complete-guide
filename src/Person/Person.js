@@ -1,3 +1,4 @@
+import Radium from "radium";
 import React from "react";
 import "./Person.css";
 // function name should be begin with lowercase 
@@ -13,4 +14,4 @@ const person = (props) => {
     )
 };
 
-export default person;
+export default Radium (person);
