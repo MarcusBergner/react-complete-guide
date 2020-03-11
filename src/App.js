@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
-import styled from "styled-components";
 import './App.css';
 import Person from './Person/Person';
 
 
-const StyledButton = styled.button`
-    background-color: ${props => props.alt ? "red" : "green"};
-    color: white;
-    font: inherit;
-    border: 1px solid blue;
-    padding: 8px;
-    cursor: pointer;
-    // define pseudo selector with Radium- package (until Radium-package is install).
-      &:hover {
-        background-color: ${props => props.alt ? "salmon" : "lightgreen"};
-        color: black;
-      }
-  `;
+// const button = styled.button`
+//     background-color: ${props => props.alt ? "red" : "green"};
+//     color: white;
+//     font: inherit;
+//     border: 1px solid blue;
+//     padding: 8px;
+//     cursor: pointer;
+//       &:hover {
+//         background-color: ${props => props.alt ? "salmon" : "lightgreen"};
+//         color: black;
+//       }
+//   `;
 // this show the traditional set up for manage state  by class-components, befor React 16.8 lunched!
 class  App extends Component {
     state = {
@@ -112,8 +110,8 @@ class  App extends Component {
          <p className={classes.join("")}>This is really working!</p>
        {/* anonymous function will executed onClick 
        returns result of switchNameHandler() */}
-         <StyledButton alt={this.state.showPersons}
-         onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton>
+         <button className="button"
+         onClick={this.togglePersonsHandler}>Toggle Persons</button>
          {persons}
         
       
