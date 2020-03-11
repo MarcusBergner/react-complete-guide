@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 
 
-// only use error boundary for cases, if you have some code you know that it may fail !!
+// only use error boundary for cases, if you have some code you know that it might fail and you cant't control that !!
 class ErrorBoundary extends Component{
 
     state={
