@@ -94,19 +94,19 @@ class  App extends Component {
     return (
       <StyleRoot>
 
-      <div className="App">
-       <h1>Hi i'am an react app</h1>
-       <p className={classes.join("")}>This is really working!</p>
+       <div className="App">
+         <h1>Hi i'am an react app</h1>
+         <p className={classes.join("")}>This is really working!</p>
        {/* anonymous function will executed onClick 
        returns result of switchNameHandler() */}
-       <button
-       style={style} 
-       onClick={this.togglePersonsHandler}>Toggle Persons</button>
-       {persons}
+         <button
+        style={style} 
+         onClick={this.togglePersonsHandler}>Toggle Persons</button>
+         {persons}
         
       
-      </div>
-       </StyleRoot>
+        </div>
+      </StyleRoot>
     );
    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
