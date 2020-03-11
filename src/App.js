@@ -73,11 +73,18 @@ class  App extends Component {
       // styling new value to one of style-properties
       style.backgroundColor="red";
     }
-
+    // setting dynamic style inputs, reffernce to css-classes
+    let classes=[];
+    if(this.state.persons.length <=2){
+    classes.push("red"); 
+  }
+  if(this.state.persons.length <=1){
+    classes.push("bold");
+  }
     return (
       <div className="App">
        <h1>Hi i'am an react app</h1>
-       <p>This is really working!</p>
+       <p className={classes.join("")}>This is really working!</p>
        {/* anonymous function will executed onClick 
        returns result of switchNameHandler() */}
        <button
