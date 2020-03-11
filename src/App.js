@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import classes from "./App.css";
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import Person from './Person/Person';
 
 
@@ -80,12 +81,15 @@ class  App extends Component {
         <div >
           {/* start outputing as list, if more than 2 arguments inside map(), they must wrap in ()  */}
           {this.state.persons.map((person, index) => {
-            return <Person
+            return <ErrorBoundary  key={person.id}>
+
+            <Person
             click={()=> this.deletePersonHandler(index)}
-             name={person.name}
+            name={person.name}
             age={person.age}
-            key={person.id}
+           
             changed={(event)=> this.nameChangedHandler(event, person.id)}/>
+            </ErrorBoundary> 
           })}
           
         </div> 
