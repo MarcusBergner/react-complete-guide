@@ -46,13 +46,15 @@ class  App extends Component {
   render() {
     // set inlineStyles
     const style = {
-      backgroundColor:"white",
+      backgroundColor:"green",
+      color:"white",
       font:"inherit",
       border:"1px solid blue",
       padding: "8px",
       cursor: "pointer"
     };
     let persons = null;
+    // setting person variable 
     if(this.state.showPersons){
       persons = (
         <div >
@@ -68,6 +70,8 @@ class  App extends Component {
           
         </div> 
       );
+      // styling new value to one of style-properties
+      style.backgroundColor="red";
     }
 
     return (
