@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
+import Person from '../components/Persons/Person/Person';
 import './App.css';
 import classes from "./App.css";
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
-import Person from './Person/Person';
 
 
 // const button = styled.button`
