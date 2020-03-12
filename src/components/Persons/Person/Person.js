@@ -4,6 +4,7 @@ import classes from "./Person.css";
 // function name should be begin with lowercase 
 // ArrowFunction: es6 equivalennt to function(){}
 const person = (props) => {
+    console.log("[Person.js] randering...");
       // const style ={
     //     "@media (min-width: 500px)" :{
     //         width: "450"
