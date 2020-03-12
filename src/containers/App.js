@@ -1,23 +1,9 @@
 import React, { Component } from 'react';
-import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
-import Person from '../components/Persons/Person/Person';
+import Cockpit from '../components/Cockpit/Cockpit';
+import Persons from '../components/Persons/Persons';
 import './App.css';
 import classes from "./App.css";
-
-
-// const button = styled.button`
-//     background-color: ${props => props.alt ? "red" : "green"};
-//     color: white;
-//     font: inherit;
-//     border: 1px solid blue;
-//     padding: 8px;
-//     cursor: pointer;
-//       &:hover {
-//         background-color: ${props => props.alt ? "salmon" : "lightgreen"};
-//         color: black;
-//       }
-//   `;
-// this show the traditional set up for manage state  by class-components, befor React 16.8 lunched!
+// this show the traditional set up for manage & mainpulate state's  by class-components, befor React 16.8 lunched!
 class  App extends Component {
     state = {
     persons:[
@@ -74,51 +60,33 @@ class  App extends Component {
     //   }
     // };
     let persons = null;
-    let btnClasses = "";
     // setting person variable 
     if(this.state.showPersons){
       persons = (
-        <div >
-          {/* start outputing as list, if more than 2 arguments inside map(), they must wrap in ()  */}
-          {this.state.persons.map((person, index) => {
-            return <ErrorBoundary  key={person.id}>
+      <div>
 
-            <Person
-            click={()=> this.deletePersonHandler(index)}
-            name={person.name}
-            age={person.age}
-           
-            changed={(event)=> this.nameChangedHandler(event, person.id)}/>
-            </ErrorBoundary> 
-          })}
-          
-        </div> 
-      );
+          {/* start outputing as list, if more than 2 arguments inside map(), they must wrap in ()  */}
+         <Persons
+         persons={this.state.persons}
+         clicked={this.deletePersonHandler}
+         changed={this.nameChangedHandler}/>     
+         </div>
+         );
       // // change style dynamicaly styling new value to one of style-properties
-      btnClasses = classes.Red;
       // style.backgroundColor="red";
       //     style[":hover"] = {
       //       backgroundColor:"salmon",
       //       color:"black"
       //     }
     }
-    // setting dynamic style inputs, reffernce to css-classes
-    const assignedClasses=[];
-    if(this.state.persons.length <=2){
-    assignedClasses.push(classes.red); // classes = ["red"]
-  }
-  if(this.state.persons.length <=1){
-    assignedClasses.push(classes.bold);  // classes = ["red", "bold"]
-  }
+ 
     return (
 
        <div className={classes.App}>
-         <h1>Hi i'am an react app</h1>
-         <p className={assignedClasses.join(" ")}>This is really working!</p>
-       {/* anonymous function will executed onClick 
-       returns result of switchNameHandler() */}
-         <button className={btnClasses}
-         onClick={this.togglePersonsHandler}>Toggle Persons</button>
+      <Cockpit 
+        showPersons={this.state.showPersons}
+        persons={this.state.persons}
+         clicked={this.togglePersonsHandler}/>
          {persons}
         
       
