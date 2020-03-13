@@ -33,13 +33,26 @@ class App extends Component {
       showPersons:false
   }
   // ---begin---Component-Lifecycle-Methods
+  // --> most important hooks, for things like fetchung new data from a server--> are componentDidUpdate & componentDidMount !
   static getDerivedStateFromProps(props, state){
     console.log("[App.js] getDerivedStateFromProps", props);
     return state;
   }
+// 
   USAFE_componentWillMount(){
 console.log("[App.js] USAFE_componentWillMount");
 }
+
+// important for performance improvements
+shouldComponentUpdate(nextProps, nextState){
+console.log("[App.js] shouldComponentUpdate");
+return true ;
+  
+}
+  componentDidUpdate(){
+console.log("[App.js] componentDidUpdate");
+    
+  }
 // only older react version support this method componentDidMount()
 // componentDidMount() {
 //     console.log("[App.js] componentDidMount");

@@ -23,6 +23,7 @@ class Persons extends Component  {
         return {message: "Snapshot!"};
         
     }
+    // componentDidUpdate() --> use it for fetch new data from a server, after the update finished !  
     
     componentDidUpdate(prevProps, prevState, snapshot){
         console.log("[Persons.js] componentDidUpdate");
