@@ -3,17 +3,50 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import Persons from '../components/Persons/Persons';
 import './App.css';
 import classes from "./App.css";
-// this show the traditional set up for manage & mainpulate state's  by class-components, befor React 16.8 lunched!
-class  App extends Component {
-    state = {
-    persons:[
-      {id:"asasd", name: "Max", age:28},
-      {id:"asasd2", name: "Manu", age :22},
-      {id:"sasdq",name: "Stefan", age :42}
-    ],
-    otherState:"some other value",
-    showPersons:false
+  // this show the traditional set up for manage & mainpulate state's  by class-components, befor React 16.8 lunched!
+class App extends Component {
+  constructor(props) {
+    // IMPORTEND --> if class extends Components  
+    // --> TUDO super() to execute the constructor of the component which is extending !
+    super(props);
+    console.log("[App.js] constructor");
+    // here is a example bevore React 16.8 release, to initialize the state!  
+    // this.state = {
+    //   persons:[
+    //     {id:"asasd", name: "Max", age:28},
+    //     {id:"asasd2", name: "Manu", age :22},
+    //     {id:"sasdq",name: "Stefan", age :42}
+    //   ],
+    //   otherState:"some other value",
+    //   showPersons:false
+
+    // }
   }
+  // newer syntax after (16.8) for initialize the state --> oldSyntax: with constructor !
+    state = {
+      persons:[
+        {id:"asasd", name: "Max", age:28},
+        {id:"asasd2", name: "Manu", age :22},
+        {id:"sasdq",name: "Stefan", age :42}
+      ],
+      otherState:"some other value",
+      showPersons:false
+  }
+  // ---begin---Component-Lifecycle-Methods
+  static getDerivedStateFromProps(props, state){
+    console.log("[App.js] getDerivedStateFromProps", props);
+    return state;
+  }
+  USAFE_componentWillMount(){
+console.log("[App.js] USAFE_componentWillMount");
+}
+// only older react version support this method componentDidMount()
+// componentDidMount() {
+//     console.log("[App.js] componentDidMount");
+//   }
+  // ---end---Component-Lifecycle-Methods
+
+
   // remove persons by index and update state
   deletePersonHandler= (personIndex)=>{
     // const persons = this.state.persons.slice();
@@ -59,6 +92,7 @@ class  App extends Component {
     //     color:"black"
     //   }
     // };
+    console.log("[App.js] render");
     let persons = null;
     // setting person variable 
     if(this.state.showPersons){
@@ -84,6 +118,7 @@ class  App extends Component {
 
        <div className={classes.App}>
       <Cockpit 
+        title={this.props.appTitle}
         showPersons={this.state.showPersons}
         persons={this.state.persons}
          clicked={this.togglePersonsHandler}/>

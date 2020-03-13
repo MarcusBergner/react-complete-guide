@@ -1,19 +1,54 @@
-import React from "react";
+import React, { Component } from "react";
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import Person from "./Person/Person";
 // functional- component
-const persons = (props) => props.persons.map((person, index) => {
-        
-        
-return <ErrorBoundary  key={person.id}>
+class Persons extends Component  {
+  // ---begin---Component-Lifecycle-Update-Methods
 
-                <Person
-                click={()=> props.clicked(index)}
-                name={person.name}
-                age={person.age}
+    // static getDerivedStateFromProps(props, state){
+    //     console.log("[Persons.js] getDerivedStateFromProps");
+    //     return state;
+    // }
+
+    // could used componentWillReceiveProps() for update some internal state befor react 16.8
+    // componentWillReceiveProps(props){
+    //     console.log("[Persons.js] componentWillReceiveProps", props);
+    // }
+    shouldComponentUpdate(nextProps, nextState){
+        console.log("[Persons.js] shouldComponentUpdate");
+    return true;
+        }
+    getSnapshotBeforeUpdate(prevProps, prevState){
+        console.log("[Persons.js] getSnapshotBeforeUpdate");
+        return {message: "Snapshot!"};
+        
+    }
+    
+    componentDidUpdate(prevProps, prevState, snapshot){
+        console.log("[Persons.js] componentDidUpdate");
+        console.log(snapshot);
+        
+    }
+  // ---end---Component-Lifecycle-Update-Methods
+
+    render(){
+
+        console.log("[Persons.js] rendering...");
+        return this.props.persons.map((person, index) => {
             
-                changed={(event)=> props.changed(event, person.id)}/>
-                </ErrorBoundary> 
-    });
+            return (
+                <ErrorBoundary  key={person.id}>
 
-export default persons;
+                    <Person
+                    click={()=> this.props.clicked(index)}
+                    name={person.name}
+                    age={person.age}
+                    
+                    changed={(event)=> this.props.changed(event, person.id)}/>
+                </ErrorBoundary> 
+                );
+            });
+        }
+};
+
+export default Persons;
