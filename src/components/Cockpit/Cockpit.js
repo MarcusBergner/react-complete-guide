@@ -3,12 +3,16 @@ import classes from "./Cockpit.css";
 // funcional componet
 const cockpit = (props)=>{
 
-    // this is a React-Hook which combines the (componentDidMount & componentDidUpdate - Lifecyclehook) in one effect! 
+    // this is a React-Hook which combines the (componentDidMount & componentDidUpdate - Lifecyclehook-effect) in one effect! 
     useEffect(() => {
         console.log("[Cockpit.js] useEffect !");
-          }
-          // Http request.... you can do that 
-    );
+        // Http request.... you can do that 
+        setTimeout(() => {
+            alert("Save data to cloud.... !");
+        },1000);
+        // [...] --> there allows you to control when this executes! 
+        // [] --> whitout content it will this executes only once, when it is initialize! 
+    },[props.persons]);
     
        // setting dynamic style inputs, reffernce to css-classes
        const assignedClasses=[];
