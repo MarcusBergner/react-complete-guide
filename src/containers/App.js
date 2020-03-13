@@ -4,7 +4,7 @@ import Persons from '../components/Persons/Persons';
 import './App.css';
 import classes from "./App.css";
   // this show the traditional set up for manage & mainpulate state's  by class-components, befor React 16.8 lunched!
-class  App extends Component {
+class App extends Component {
   constructor(props) {
     // IMPORTEND --> if class extends Components  
     // --> TUDO super() to execute the constructor of the component which is extending !
@@ -37,12 +37,13 @@ class  App extends Component {
     console.log("[App.js] getDerivedStateFromProps", props);
     return state;
   }
-  componentWillMount(){
-console.log("[App.js] componentWillMount");
+  USAFE_componentWillMount(){
+console.log("[App.js] USAFE_componentWillMount");
 }
-  componentDidMount() {
-    console.log("[App.js] componentDidMount");
-  }
+// only older react version support this method componentDidMount()
+// componentDidMount() {
+//     console.log("[App.js] componentDidMount");
+//   }
   // ---end---Component-Lifecycle-Methods
 
 
