@@ -44,12 +44,12 @@ class App extends Component {
 console.log("[App.js] USAFE_componentWillMount");
 }
 
-// important for performance improvements
-shouldComponentUpdate(nextProps, nextState){
-console.log("[App.js] shouldComponentUpdate");
-return true ;
-  
-}
+  // important for performance improvements
+  shouldComponentUpdate(nextProps, nextState){
+  console.log("[App.js] shouldComponentUpdate");
+  return true ;
+    
+  }
   componentDidUpdate(){
 console.log("[App.js] componentDidUpdate");
     
