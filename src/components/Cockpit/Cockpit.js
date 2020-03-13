@@ -37,10 +37,10 @@ const cockpit = (props)=>{
            btnClasses = classes.Red;
         } 
 
-       if(props.persons.length <=2){
+       if(props.personsLength <=2){
        assignedClasses.push(classes.red); // classes = ["red"]
      }
-     if(props.persons.length <=1){
+     if(props.personsLength <=1){
        assignedClasses.push(classes.bold);  // classes = ["red", "bold"]
      }
     return(
@@ -56,4 +56,7 @@ const cockpit = (props)=>{
     );
 
 };
-export default cockpit;
+// React.memo() --> store snapshot of this component, only if inputs changes it will re-render!
+// otherwise if inputs do not change and some parent component wants to update this cockpit-component, -->React give back that stored component! 
+// it is a good idea to wrap functional componets that might not need to update with ebvery change in the parent component! 
+export default React.memo(cockpit);
