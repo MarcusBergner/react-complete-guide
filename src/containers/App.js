@@ -30,16 +30,30 @@ class App extends Component {
         {id:"sasdq",name: "Stefan", age :42}
       ],
       otherState:"some other value",
-      showPersons:false
+      showPersons:false,
+      showCockpit: true
   }
   // ---begin---Component-Lifecycle-Methods
+  // --> most important hooks, for things like fetchung new data from a server--> are componentDidUpdate & componentDidMount !
   static getDerivedStateFromProps(props, state){
     console.log("[App.js] getDerivedStateFromProps", props);
     return state;
   }
+// 
   USAFE_componentWillMount(){
 console.log("[App.js] USAFE_componentWillMount");
 }
+
+  // important for performance improvements
+  shouldComponentUpdate(nextProps, nextState){
+  console.log("[App.js] shouldComponentUpdate");
+  return true ;
+    
+  }
+  componentDidUpdate(){
+console.log("[App.js] componentDidUpdate");
+    
+  }
 // only older react version support this method componentDidMount()
 // componentDidMount() {
 //     console.log("[App.js] componentDidMount");
@@ -117,11 +131,17 @@ console.log("[App.js] USAFE_componentWillMount");
     return (
 
        <div className={classes.App}>
-      <Cockpit 
+         <button onClick={() => {
+           this.setState({showCockpit: false});
+         }} >Remove Cockpit
+         </button>
+      {this.state.showCockpit ? ( 
+      <Cockpit
         title={this.props.appTitle}
         showPersons={this.state.showPersons}
-        persons={this.state.persons}
-         clicked={this.togglePersonsHandler}/>
+        personsLenght={this.state.persons.length}
+         clicked={this.togglePersonsHandler}
+         />) : null}
          {persons}
         
       
