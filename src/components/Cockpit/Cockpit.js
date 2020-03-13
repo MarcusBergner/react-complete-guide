@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./Cockpit.css";
 // funcional componet
 const cockpit = (props)=>{
+
+    // this is a React-Hook which combines the (componentDidMount & componentDidUpdate - Lifecyclehook) in one effect! 
+    useEffect(() => {
+        console.log("[Cockpit.js] useEffect !");
+          }
+          // Http request.... you can do that 
+    );
+    
        // setting dynamic style inputs, reffernce to css-classes
        const assignedClasses=[];
        let btnClasses="";
