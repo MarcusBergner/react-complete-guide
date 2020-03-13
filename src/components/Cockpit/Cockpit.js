@@ -5,15 +5,30 @@ const cockpit = (props)=>{
 
     // this is a React-Hook which combines the (componentDidMount & componentDidUpdate - Lifecyclehook-effect) in one effect! 
     useEffect(() => {
-        console.log("[Cockpit.js] useEffect !");
+        console.log("[Cockpit.js] 1st useEffect !");
         // Http request.... you can do that 
-        setTimeout(() => {
+      const timer =  setTimeout(() => {
             alert("Save data to cloud.... !");
         },1000);
-        // [...] --> there allows you to control when this executes! 
+        // cleanUp work --> it runs BEFORE the main useEffect function runs, but AFTER the (first) render cycle! 
+            return () => {
+                // with clearTimeout, it is a example to cleanUp work in useEffect!
+                clearTimeout(timer);
+            console.log("[Cockpit.js] cleanUp work in useEffect !");
+            };
+
+        // [...] --> there allows you to control, all the data thats are inside listed, when this executes! 
+        // every update cycle with no 2nd argument!
+        // },[props.persons]);
         // [] --> whitout content it will this executes only once, when it is initialize! 
-    },[props.persons]);
-    
+        },[]);
+
+        useEffect(()=>{
+            console.log("[Cockpit.js] 2nd useEffect !");
+            return () => {
+                console.log("[Cockpit.js] 2nd cleanUp work in 2nd useEffect !");
+                };
+        });
        // setting dynamic style inputs, reffernce to css-classes
        const assignedClasses=[];
        let btnClasses="";

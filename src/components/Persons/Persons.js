@@ -24,11 +24,14 @@ class Persons extends Component  {
         
     }
     // componentDidUpdate() --> use it for fetch new data from a server, after the update finished !  
-    
-    componentDidUpdate(prevProps, prevState, snapshot){
+        componentDidUpdate(prevProps, prevState, snapshot){
         console.log("[Persons.js] componentDidUpdate");
         console.log(snapshot);
         
+    }
+    // CleanUp work --> for class-based-componets
+    componentWillUnmount(){
+        console.log("[Persons.js] componentWillUnmount --> CleanUp work !");
     }
   // ---end---Component-Lifecycle-Update-Methods
 
