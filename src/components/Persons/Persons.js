@@ -1,8 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import Person from "./Person/Person";
 // functional- component
-class Persons extends Component  {
+// PureComponent --> just normal component implements shouldComponentUpdate with a complete props check,
+// any changes in any prop of that component!
+class Persons extends PureComponent  {
   // ---begin---Component-Lifecycle-Update-Methods
 
     // static getDerivedStateFromProps(props, state){
@@ -14,14 +16,19 @@ class Persons extends Component  {
     // componentWillReceiveProps(props){
     //     console.log("[Persons.js] componentWillReceiveProps", props);
     // }
-    shouldComponentUpdate(nextProps, nextState){
-        console.log("[Persons.js] shouldComponentUpdate");
-        if(nextProps.persons !== this.props.persons){
-            return true;
-        }else {
-          return  false;
-        }
-        }
+    // manuelle definition example, for Component Property-Update-Ckecks !  
+    // shouldComponentUpdate(nextProps, nextState){
+    //     console.log("[Persons.js] shouldComponentUpdate");
+    //     if(nextProps.persons !== this.props.persons ||
+    //          nextProps.changed !== this.props.changed ||
+    //           nextProps.clicked !== this.props.clicked
+    //           ){
+    //         return true;
+    //     }else {
+    //       return  false;
+    //     }
+    //     // return false;
+    //     }
     getSnapshotBeforeUpdate(prevProps, prevState){
         console.log("[Persons.js] getSnapshotBeforeUpdate");
         return {message: "Snapshot!"};
