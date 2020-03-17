@@ -4,8 +4,8 @@ import Person from "./Person/Person";
 // functional- component
 // PureComponent --> just normal component implements shouldComponentUpdate with a complete props check,
 // any changes in any prop of that component!
-class Persons extends PureComponent  {
-  // ---begin---Component-Lifecycle-Update-Methods
+class Persons extends PureComponent {
+    // ---begin---Component-Lifecycle-Update-Methods
 
     // static getDerivedStateFromProps(props, state){
     //     console.log("[Persons.js] getDerivedStateFromProps");
@@ -29,43 +29,43 @@ class Persons extends PureComponent  {
     //     }
     //     // return false;
     //     }
-    getSnapshotBeforeUpdate(prevProps, prevState){
+    getSnapshotBeforeUpdate(prevProps, prevState) {
 
-        
+
         console.log("[Persons.js] getSnapshotBeforeUpdate");
-        return {message: "Snapshot!"};
-        
+        return { message: "Snapshot!" };
+
     }
     // componentDidUpdate() --> use it for fetch new data from a server, after the update finished !  
-        componentDidUpdate(prevProps, prevState, snapshot){
+    componentDidUpdate(prevProps, prevState, snapshot) {
         console.log("[Persons.js] componentDidUpdate");
         console.log(snapshot);
-        
+
     }
     // CleanUp work --> for class-based-componets
-    componentWillUnmount(){
+    componentWillUnmount() {
         console.log("[Persons.js] componentWillUnmount --> CleanUp work !");
     }
-  // ---end---Component-Lifecycle-Update-Methods
+    // ---end---Component-Lifecycle-Update-Methods
 
-    render(){
+    render() {
 
         console.log("[Persons.js] rendering...");
         return this.props.persons.map((person, index) => {
-            
+
             return (
-                <ErrorBoundary  key={person.id}>
+                <ErrorBoundary key={person.id}>
 
                     <Person
-                    click={()=> this.props.clicked(index)}
-                    name={person.name}
-                    age={person.age}
-                    
-                    changed={(event)=> this.props.changed(event, person.id)}/>
-                </ErrorBoundary> 
-                );
-            });
-        }
+                        click={() => this.props.clicked(index)}
+                        name={person.name}
+                        age={person.age}
+
+                        changed={(event) => this.props.changed(event, person.id)} />
+                </ErrorBoundary>
+            );
+        });
+    }
 };
 
 export default Persons;
