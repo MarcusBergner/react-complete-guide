@@ -2,9 +2,13 @@ import React, { Component, Fragment } from "react";
 import classes from "./Person.css";
 import Aux from "../../../hoc/Auxillary";
 import withClass from "../../../hoc/withClass";
+import PropTypes from "prop-types";
 // StyleDiv returned a react-component
 // function name should be begin with lowercase
 // ArrowFunction: es6 equivalennt to function(){}
+
+//-----notes-----
+// for add some prop types --> use an extra react-package, "npm install --save prop-types"
 class Person extends Component {
   render() {
     console.log("[Person.js] randering...");
@@ -38,5 +42,12 @@ class Person extends Component {
     );
   }
 }
-
+// propTypes --> special property which you add any Javascript object or any Javascript component object!
+//  React will watch out for in development-mode + give warning by pass incorrect porps.
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changed: PropTypes.func
+};
 export default withClass(Person, classes.Person);
