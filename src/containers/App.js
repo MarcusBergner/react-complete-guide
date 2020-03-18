@@ -5,6 +5,7 @@ import './App.css';
 import classes from "./App.css";
 import withClass from "../hoc/withClass";
 import Auxillary from "../hoc/Auxillary";
+import AuthContext from "../context/auth-context";
 // this show the traditional set up for manage & mainpulate state's  by class-components, befor React 16.8 lunched!
 class App extends Component {
   constructor(props) {
@@ -146,23 +147,22 @@ class App extends Component {
     }
 
     return (
-
+      // {{}} --> outer curly baces = enter dynamic content, inner curly braces = construct Javascript object
       <Auxillary>
         <button onClick={() => {
           this.setState({ showCockpit: false });
         }} >Remove Cockpit
          </button>
-        {this.state.showCockpit ? (
-          <Cockpit
-            title={this.props.appTitle}
-            showPersons={this.state.showPersons}
-            personsLenght={this.state.persons.length}
-            clicked={this.togglePersonsHandler}
-            login={this.loginHandler}
-          />) : null}
-        {persons}
-
-
+        <AuthContext.Provider value={{ authenticated: this.state.authenticated, login: this.loginHandler }}>
+          {this.state.showCockpit ? (
+            <Cockpit
+              title={this.props.appTitle}
+              showPersons={this.state.showPersons}
+              personsLenght={this.state.persons.length}
+              clicked={this.togglePersonsHandler}
+            />) : null}
+          {persons}
+        </AuthContext.Provider>
       </Auxillary>
 
     );

@@ -6,7 +6,6 @@ import Person from "./Person/Person";
 // any changes in any prop of that component!
 class Persons extends PureComponent {
     // ---begin---Component-Lifecycle-Update-Methods
-
     // static getDerivedStateFromProps(props, state){
     //     console.log("[Persons.js] getDerivedStateFromProps");
     //     return state;
@@ -51,22 +50,25 @@ class Persons extends PureComponent {
     render() {
 
         console.log("[Persons.js] rendering...");
-        return this.props.persons.map((person, index) => {
+        return (this.props.persons.map((person, index) => {
 
             return (
-                <ErrorBoundary key={person.id}>
+                <ErrorBoundary key={person.id} >
 
                     <Person
                         click={() => this.props.clicked(index)}
                         name={person.name}
                         age={person.age}
                         key={person.id}
-                        changed={(event) => this.props.changed(event, person.id)}
-                        isAuth={this.props.isAuthenticated} />
-                </ErrorBoundary>
-            );
-        });
+                        changed={event => this.props.changed(event, person.id)}/>
+                 </ErrorBoundary>
+
+                );
+            })
+        );
     }
-};
+
+    
+}
 
 export default Persons;

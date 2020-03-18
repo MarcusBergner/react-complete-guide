@@ -1,8 +1,10 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import classes from "./Person.css";
-import Aux from "../../../hoc/Auxillary";
+import Auxillary from "../../../hoc/Auxillary";
 import withClass from "../../../hoc/withClass";
 import PropTypes from "prop-types";
+import AuthContext from "../../../context/auth-context";
+
 // StyleDiv returned a react-component
 // function name should be begin with lowercase
 // ArrowFunction: es6 equivalennt to function(){}
@@ -31,11 +33,17 @@ class Person extends Component {
     return (
       // <div className="Person" style={style}>
       // <Fragment>
-      <Aux>
+      <Auxillary>
+        <AuthContext.Consumer>
+          {context =>
+            context.authenticated ?
+              <p>Authenticated!</p> :
+              <p>Please log in </p>}
+        </AuthContext.Consumer>
         {/*alternative to our "AUX" custom High-order-Component:
                        --> React.Fragment*/}
         {/* <div className={classes.Person}> */}
-        {this.props.isAuth ? <p>Authenticated!</p> : <p>Please log in </p>}
+        {}
         <p onClick={this.props.click}>
           I'm {this.props.name} and I am {this.props.age} years old!
         </p>
@@ -50,7 +58,7 @@ class Person extends Component {
         />
         {/* </div> */}
         {/* </div> */}
-      </Aux>
+      </Auxillary>
       // </Fragment>
     );
   }
