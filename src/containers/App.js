@@ -34,7 +34,8 @@ class App extends Component {
     otherState: "some other value",
     showPersons: false,
     showCockpit: true,
-    changeCounter: 0
+    changeCounter: 0,
+    authenticated: false
   };
   // ---begin---Component-Lifecycle-Methods
   // --> most important hooks, for things like fetchung new data from a server--> are componentDidUpdate & componentDidMount !
@@ -101,6 +102,9 @@ class App extends Component {
     const doesShow = this.state.showPersons;
     this.setState({ showPersons: !doesShow });
   }
+  loginHandler = () => {
+    this.setState({ authenticated: true });
+  };
 
   // everything inside the render method gets executed whenever React re-renders this component
   render() {
@@ -129,7 +133,8 @@ class App extends Component {
           <Persons
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
-            changed={this.nameChangedHandler} />
+            changed={this.nameChangedHandler}
+            isAuthenticated={this.state.authenticated} />
         </div>
       );
       // // change style dynamicaly styling new value to one of style-properties
@@ -153,6 +158,7 @@ class App extends Component {
             showPersons={this.state.showPersons}
             personsLenght={this.state.persons.length}
             clicked={this.togglePersonsHandler}
+            login={this.loginHandler}
           />) : null}
         {persons}
 

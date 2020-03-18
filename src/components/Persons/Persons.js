@@ -60,8 +60,9 @@ class Persons extends PureComponent {
                         click={() => this.props.clicked(index)}
                         name={person.name}
                         age={person.age}
-
-                        changed={(event) => this.props.changed(event, person.id)} />
+                        key={person.id}
+                        changed={(event) => this.props.changed(event, person.id)}
+                        isAuth={this.props.isAuthenticated} />
                 </ErrorBoundary>
             );
         });

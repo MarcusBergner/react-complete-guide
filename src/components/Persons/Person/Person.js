@@ -35,7 +35,7 @@ class Person extends Component {
         {/*alternative to our "AUX" custom High-order-Component:
                        --> React.Fragment*/}
         {/* <div className={classes.Person}> */}
-
+        {this.props.isAuth ? <p>Authenticated!</p> : <p>Please log in </p>}
         <p onClick={this.props.click}>
           I'm {this.props.name} and I am {this.props.age} years old!
         </p>
