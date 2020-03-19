@@ -5,6 +5,7 @@ import './App.css';
 import classes from "./App.css";
 import withClass from "../hoc/withClass";
 import Auxillary from "../hoc/Auxillary";
+import AuthContext from "../context/auth-context";
 // this show the traditional set up for manage & mainpulate state's  by class-components, befor React 16.8 lunched!
 class App extends Component {
   constructor(props) {
@@ -34,7 +35,8 @@ class App extends Component {
     otherState: "some other value",
     showPersons: false,
     showCockpit: true,
-    changeCounter: 0
+    changeCounter: 0,
+    authenticated: false
   };
   // ---begin---Component-Lifecycle-Methods
   // --> most important hooks, for things like fetchung new data from a server--> are componentDidUpdate & componentDidMount !
@@ -101,6 +103,9 @@ class App extends Component {
     const doesShow = this.state.showPersons;
     this.setState({ showPersons: !doesShow });
   }
+  loginHandler = () => {
+    this.setState({ authenticated: true });
+  };
 
   // everything inside the render method gets executed whenever React re-renders this component
   render() {
@@ -129,7 +134,8 @@ class App extends Component {
           <Persons
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
-            changed={this.nameChangedHandler} />
+            changed={this.nameChangedHandler}
+            isAuthenticated={this.state.authenticated} />
         </div>
       );
       // // change style dynamicaly styling new value to one of style-properties
@@ -141,22 +147,22 @@ class App extends Component {
     }
 
     return (
-
+      // {{}} --> outer curly baces = enter dynamic content, inner curly braces = construct Javascript object
       <Auxillary>
         <button onClick={() => {
           this.setState({ showCockpit: false });
         }} >Remove Cockpit
          </button>
-        {this.state.showCockpit ? (
-          <Cockpit
-            title={this.props.appTitle}
-            showPersons={this.state.showPersons}
-            personsLenght={this.state.persons.length}
-            clicked={this.togglePersonsHandler}
-          />) : null}
-        {persons}
-
-
+        <AuthContext.Provider value={{ authenticated: this.state.authenticated, login: this.loginHandler }}>
+          {this.state.showCockpit ? (
+            <Cockpit
+              title={this.props.appTitle}
+              showPersons={this.state.showPersons}
+              personsLenght={this.state.persons.length}
+              clicked={this.togglePersonsHandler}
+            />) : null}
+          {persons}
+        </AuthContext.Provider>
       </Auxillary>
 
     );
