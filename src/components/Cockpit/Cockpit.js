@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import classes from "./Cockpit.css";
 import AuthContext from "../../context/auth-context";
 // funcional componet
@@ -6,6 +6,11 @@ const cockpit = (props) => {
 
     // useRef-Hook
     const toggleBtnRef = useRef(null);
+    // useContext-Hook --> the same what static contextType is to class-based components,
+    // it gives you to access to the context. context API managing data across components,
+    // without the need to pass data around with props! --> Redux have a alternative way
+    const authContext = useContext(AuthContext);
+    console.log(authContext.authenticated);
 
     // this is a React-Hook which combines the (componentDidMount & componentDidUpdate - Lifecyclehook-effect) in one effect! 
     useEffect(() => {
@@ -58,10 +63,9 @@ const cockpit = (props) => {
                 ref={toggleBtnRef}
                 className={btnClasses}
                 onClick={props.clicked}>Toggle Persons</button>
-            <AuthContext>
 
-                {(context) => <button onClick={context.login} Log in></button>}
-            </AuthContext>
+            <button onClick={authContext.login} >Log in</button>
+
         </div>
     );
 

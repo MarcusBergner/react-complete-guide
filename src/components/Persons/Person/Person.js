@@ -18,10 +18,16 @@ class Person extends Component {
     this.inputElementRef = React.createRef();
   }
 
+  // contextTxpe --> special way of using context, since react 16.8. 
+  // give access to context in places where previously haad no access.
+  // is recommend to used in class-based components !
+  static contextType = AuthContext;
   componentDidMount() {
     // this.inputElement.focus();
     this.inputElementRef.current.focus();
+    console.log(this.context.authenticated);
   }
+
   render() {
     console.log("[Person.js] randering...");
     // const style ={
@@ -34,12 +40,11 @@ class Person extends Component {
       // <div className="Person" style={style}>
       // <Fragment>
       <Auxillary>
-        <AuthContext.Consumer>
-          {context =>
-            context.authenticated ?
-              <p>Authenticated!</p> :
-              <p>Please log in </p>}
-        </AuthContext.Consumer>
+
+        {this.context.authenticated ?
+          <p>Authenticated!</p> :
+          <p>Please log in </p>
+        }
         {/*alternative to our "AUX" custom High-order-Component:
                        --> React.Fragment*/}
         {/* <div className={classes.Person}> */}
